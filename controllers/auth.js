@@ -2,10 +2,11 @@ const express = require('express')
 const router = express.Router()
 // const User = require('../models/user')
 const bcrypt = require('bcrypt')
-
+//
 router.get('/sign-up', async (req, res) => {
   res.render('auth/sign-up.ejs')
 })
+//
 
 router.post('/sign-up', async (req, res) => {
   const userInDatabase = await User.findOne({ username: req.body.username })
@@ -20,6 +21,8 @@ router.post('/sign-up', async (req, res) => {
   const user = await User.create(req.body)
   res.send(`Thanks for signing up ${user.username}`)
 })
+
+//
 
 router.get('/sign-in', (req, res) => {
   res.render('auth/sign-in.ejs')
@@ -50,6 +53,8 @@ router.post('/sign-in', async (req, res) => {
     res.redirect('/')
   }
 })
+
+//
 
 router.get('/sing-out', (req, res) => {
   req.session.destroy()

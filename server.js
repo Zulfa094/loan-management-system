@@ -9,10 +9,14 @@ const methodOverride = require('method-override')
 const morgan = require('morgan')
 const session = require('express-session')
 
+const isSignedIn = require()
 const port = process.env.PORT ? process.env.PORT : '3000'
 
 const authController = require('./controllers/auth.js')
+const serviceController = require('./controllers/services.js')
+
 app.use('/auth', authController)
+app.use('/services', serviceController)
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
