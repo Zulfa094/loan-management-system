@@ -7,17 +7,19 @@
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Your Loans</h1>
-    <a href="/loans/new">Apply for a New Loan</a>
-    <ul>
-      <% loans.forEach((loan) => { %>
-      <li>
-        Loan of $<%= loan.amount %> for <%= loan.duration %> months at <%=
-        loan.interestRate %>%
-        <br />
-        Status: <%= loan.status %>
-      </li>
-      <% }); %>
-    </ul>
+    <h1>Edit Loan</h1>
+    <form action="/loans/<%= loan._id %>?_method=PUT" method="POST">
+      <label for="amount">Loan Amount:</label>
+      <input type="number" name="amount" value="<%= loan.amount %>" required />
+      <br />
+      <label for="status">Status:</label>
+      <select name="status" required>
+        <option value="pending" <%= loan.status === 'pending' ? 'selected' : '' %>>Pending</option>
+        <option value="approved" <%= loan.status === 'approved' ? 'selected' : '' %>>Approved</option>
+        <option value="rejected" <%= loan.status === 'rejected' ? 'selected' : '' %>>Rejected</option>
+      </select>
+      <br />
+      <button type="submit">Update Loan</button>
+    </form>
   </body>
 </html>

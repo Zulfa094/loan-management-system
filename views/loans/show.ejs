@@ -8,12 +8,11 @@
   <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1>Loan Details</h1>
-    <p><strong>Borrower:</strong> <%= loan.borrower.username %></p>
+    <p><strong>Loan ID:</strong> <%= loan._id %></p>
     <p><strong>Amount:</strong> $<%= loan.amount %></p>
-    <p><strong>Interest Rate:</strong> <%= loan.interestRate %>%</p>
-    <p><strong>Duration:</strong> <%= loan.duration %> months</p>
     <p><strong>Status:</strong> <%= loan.status %></p>
-    <a href="/loans/<%= loan._id %>/edit">Edit</a> |
+    <p><strong>Client:</strong> <%= loan.client.username %></p>
+    <a href="/loans/<%= loan._id %>/edit">Edit</a>
     <a href="/loans">Back to Loans</a>
   </body>
 </html>

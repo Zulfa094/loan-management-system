@@ -3,31 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Loan Management System</title>
+    <title>Create new Loan</title>
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <p>
-      <% if (user) { %>
-      <a href="/auth/sign-out">Sign out</a>
-      <% } else { %>
-      <a href="/auth/sign-in">Sign In</a> or
-      <a href="/auth/sign-up">Sign Up</a>
-      <% } %>
-    </p>
-
-    <% if (user) { %>
-    <h1>Welcome to the Loan Management System, <%= user.username %>!</h1>
-    <h3>Your Dashboard:</h3>
-    <ul>
-      <li><a href="/loans">View Loans</a></li>
-      <li><a href="/loans/new">Apply for a Loan</a></li>
-      <li><a href="/payments">Make a Payment</a></li>
-      <li><a href="/notifications">View Notifications</a></li>
-    </ul>
-    <% } else { %>
-    <h1>Welcome</h1>
-    <h3>Please sign in to manage your loans.</h3>
-    <% } %>
+    <h1>Create a New Loan</h1>
+    <form action="/loans" method="POST">
+      <label for="amount">Loan Amount:</label>
+      <input type="number" name="amount" required />
+      <br />
+      <label for="status">Status:</label>
+      <select name="status" required>
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+      <br />
+      <button type="submit">Create Loan</button>
+    </form>
   </body>
 </html>
