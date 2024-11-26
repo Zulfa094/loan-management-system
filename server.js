@@ -9,14 +9,10 @@ const methodOverride = require('method-override')
 const morgan = require('morgan')
 const session = require('express-session')
 
-const isSignedIn = require()
+const isSignedIn = require('./middleware/is-signed-in')
+const passUserToView = require('./middleware/pass-user-to-view')
+
 const port = process.env.PORT ? process.env.PORT : '3000'
-
-const authController = require('./controllers/auth.js')
-const serviceController = require('./controllers/services.js')
-
-app.use('/auth', authController)
-app.use('/services', serviceController)
 
 mongoose.connect(process.env.MONGODB_URI)
 mongoose.connection.on('connected', () => {
@@ -34,12 +30,30 @@ app.use(
   })
 )
 
+app.use(passUserToView)
+
+app.use((req, res, next) => {
+  if (req.session.message) {
+    res.locals.message = req.session.message
+    req.session.message = null
+  } else {
+    res.locals.message = null
+  }
+  next()
+})
+
+const authController = require('./controllers/auth.js')
+const loanController = require('./controllers/loans.js')
+
+app.use('/auth', authController)
+app.use('/services', isSignedIn, loanController)
+
+app.listen(port, () => {
+  console.log(`The express app is ready on port ${port}`)
+})
+
 app.get('/', async (req, res) => {
   res.render('index.ejs', {
     user: req.session.user
   })
-})
-
-app.listen(port, () => {
-  console.log(`The express app is ready on port ${port}`)
 })

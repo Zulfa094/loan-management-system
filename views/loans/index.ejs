@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Loans</title>
+  </head>
+  <body>
+    <h1>Your Loans</h1>
+    <a href="/loans/new">Apply for a New Loan</a>
+    <ul>
+      <% loans.forEach((loan) => { %>
+      <li>
+        Loan of $<%= loan.amount %> for <%= loan.duration %> months at <%=
+        loan.interestRate %>%
+        <br />
+        Status: <%= loan.status %>
+      </li>
+      <% }); %>
+    </ul>
+  </body>
+</html>

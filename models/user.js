@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema(
       maxlength: [10, 'This is too much man, Chill']
     },
     password: {
-      types: String,
+      type: String,
       required: true
     }
   },
@@ -17,7 +17,6 @@ const userSchema = new mongoose.Schema(
     timestamps: true
   }
 )
-
 const User = mongoose.model('User', userSchema)
 
 module.exports = User
