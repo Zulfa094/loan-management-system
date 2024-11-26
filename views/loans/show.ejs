@@ -6,6 +6,7 @@
     <title>Loan Details</title>
   </head>
   <body>
+    <%- include('../partials/_navbar.ejs') %>
     <h1>Loan Details</h1>
     <p><strong>Borrower:</strong> <%= loan.borrower.username %></p>
     <p><strong>Amount:</strong> $<%= loan.amount %></p>

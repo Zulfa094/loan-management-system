@@ -5,19 +5,8 @@
     <title>Home Page</title>
   </head>
   <body>
-    <p>
-      <a href="/auth/sign-out>">Sign out</a>
-    </p>
-    <% if (user) { %>
-    <h1>Welcome to the Loan Management System!, <%= user.username %>!</h1>
-    <% } else { %>
+    <%- include('./partials/_navbar.ejs') %>
+
     <h1>Welcome</h1>
-    <h3>
-      <p>
-        <a href="/auth/sign-up">Sign Up</a> or
-        <a href="/auth/sign-in">Sign in</a>
-      </p>
-    </h3>
-    <% } %>
   </body>
 </html>

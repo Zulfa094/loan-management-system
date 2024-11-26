@@ -6,6 +6,7 @@
     <title>Edit Loan</title>
   </head>
   <body>
+    <%- include('../partials/_navbar.ejs') %>
     <h1>Edit Loan</h1>
     <form action="/loans/<%= loan._id %>?_method=PUT" method="POST">
       <label for="amount">Loan Amount:</label>
