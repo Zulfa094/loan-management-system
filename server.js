@@ -46,7 +46,7 @@ const authController = require('./controllers/auth')
 const loanController = require('./controllers/loans')
 
 app.use('/auth', authController)
-app.use('/services', isSignedIn, loanController)
+app.use('/loans', isSignedIn, loanController)
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}`)

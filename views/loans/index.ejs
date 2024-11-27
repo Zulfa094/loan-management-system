@@ -11,6 +11,14 @@
     <%- include('../partials/_navbar.ejs') %>
     <h>Here are all your loans</h>
     <a href="/loans/new">Apply for a Loan</a>
-    <a href="/loans/<%= loan._id %>">View more details</a>
+
+    <ul>
+      <% loans.forEach((loan) => { %>
+      <li>
+        You have a loan <%= loan.amount %>
+        <a href="/loans/<%= loan._id %>">View more details</a>
+      </li>
+      <% }) %>
+    </ul>
   </body>
 </html>
