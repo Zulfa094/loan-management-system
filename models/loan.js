@@ -10,11 +10,13 @@ const loanSchema = new mongoose.Schema(
 
     amount: {
       type: Number,
-      required: true
+      required: true,
+      min: 0
     },
     interestRate: {
       type: Number,
-      required: true
+      required: true,
+      min: 0
     },
     duration: {
       type: Number,

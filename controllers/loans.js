@@ -5,8 +5,9 @@ const Loan = require('../models/loan')
 
 router.get('/', async (req, res) => {
   try {
-    const loans = await Loan.find({}).populate('client')
-    res.render('loans/index.ejs', { loans })
+    const populatedLoans = await Loan.find({}).populate('client')
+    console.log('Populated Loans: ', populatedLoans)
+    res.render('Loans/index.ejs', { loans: populatedLoans })
   } catch (err) {
     console.log(err)
     res.redirect('/')
@@ -17,25 +18,23 @@ router.get('/new', async (req, res) => {
   res.render('loans/new.ejs')
 })
 
-// Create a new loan
 router.post('/', async (req, res) => {
   req.body.client = req.session.user._id
   await Loan.create(req.body)
   res.redirect('/loans')
 })
 
-// Show a specific loan
 router.get('/:loanId', async (req, res) => {
   try {
-    const loan = await Loan.findById(req.params.loanId).populate('client')
-    res.render('loans/show.ejs', { loan })
+    const populatedLoans = await Loan.findById(req.params.loanId).populate(
+      'client'
+    )
   } catch (err) {
     console.log(err)
     res.redirect('/')
   }
 })
 
-// Edit a specific loan (form)
 router.get('/:loanId/edit', async (req, res) => {
   try {
     const loan = await Loan.findById(req.params.loanId)
@@ -46,7 +45,6 @@ router.get('/:loanId/edit', async (req, res) => {
   }
 })
 
-// Update a specific loan
 router.put('/:loanId', async (req, res) => {
   try {
     const loan = await Loan.findById(req.params.loanId)
