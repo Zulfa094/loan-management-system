@@ -4,8 +4,7 @@ const loanSchema = new mongoose.Schema(
   {
     client: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
+      ref: 'User'
     },
 
     amount: {
@@ -21,10 +20,6 @@ const loanSchema = new mongoose.Schema(
     duration: {
       type: Number,
       required: true
-    }, // Duration in months
-    status: {
-      type: String,
-      enum: ['pending', 'approved', 'rejected']
     }
   },
   { timestamps: true }

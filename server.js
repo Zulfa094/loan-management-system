@@ -42,8 +42,8 @@ app.use((req, res, next) => {
   next()
 })
 
-const authController = require('./controllers/auth.js')
-const loanController = require('./controllers/loans.js')
+const authController = require('./controllers/auth')
+const loanController = require('./controllers/loans')
 
 app.use('/auth', authController)
 app.use('/services', isSignedIn, loanController)

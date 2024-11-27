@@ -24,11 +24,12 @@ router.post('/', async (req, res) => {
   res.redirect('/loans')
 })
 
-router.get('/:loanId', async (req, res) => {
+router.get('/:loansId', async (req, res) => {
   try {
-    const populatedLoans = await Loan.findById(req.params.loanId).populate(
-      'client'
-    )
+    const populatedLoans = await Loan.findById(
+      req.params.loansId.loanId
+    ).populate('client')
+    res.render('loans/show.ejs')
   } catch (err) {
     console.log(err)
     res.redirect('/')

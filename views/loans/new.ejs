@@ -3,23 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create new Loan</title>
+    <title>Apply for a loan</title>
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Create a New Loan</h1>
+    <h1>Apply for a loan</h1>
     <form action="/loans" method="POST">
       <label for="amount">Loan Amount:</label>
       <input type="number" name="amount" required />
       <br />
-      <label for="status">Status:</label>
-      <select name="status" required>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-      </select>
-      <br />
-      <button type="submit">Create Loan</button>
+      <button type="submit">Submit</button>
     </form>
   </body>
 </html>
