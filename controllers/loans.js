@@ -35,8 +35,10 @@ router.post('/', upload.single('document'), async (req, res) => {
 
 router.get('/:loanId', async (req, res) => {
   try {
-    const loan = await Loan.findById(req.params.loanId).populate('client')
-    res.render('loans/show.ejs', { loan })
+    const populatedLoans = await Loan.findById(req.params.loanId).populate(
+      'client'
+    )
+    res.render('loans/show.ejs', { loan: populatedLoans })
   } catch (err) {
     console.log(err)
     res.redirect('/')
@@ -85,5 +87,36 @@ router.delete('/:loanId', async (req, res) => {
     res.redirect('/')
   }
 })
+
+// router.get('/admin', async (req, res) => {
+//   try {
+//     await Loan.find().populate('client', 'username name')
+//     res.render('admin', { loan })
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
+
+// router.post('/loans/:id/approve', async (req, res) => {
+//   try {
+//     await Loan.findById(req.params.loanId, {
+//       status: 'approved'
+//     })
+//     res.redirect('/loans/admin')
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
+
+// router.post('/loans/:id/reject', async (req, res) => {
+//   try {
+//     await Loan.findById(req.params.loanId, {
+//       status: 'rejected'
+//     })
+//     res.redirect('/loans/admin')
+//   } catch (err) {
+//     console.log(err)
+//   }
+// })
 
 module.exports = router

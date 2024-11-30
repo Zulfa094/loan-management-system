@@ -14,12 +14,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <!-- <link rel="stylesheet" href="/css/styles.css" /> -->
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
-        <a class="navbar-brand" href="/">Loan System</a>
+        <a class="navbar-brand" href="/">Home Page</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -55,20 +55,14 @@
 
     <section
       class="hero bg-primary text-white text-center d-flex align-items-center justify-content-center"
-      style="
-        height: 100vh;
-        background-image: url('/images/office-background.jpg');
-        background-size: cover;
-      "
+      style="height: 100vh; background-size: cover"
     >
       <div class="container">
         <h1 class="display-3 fw-bold">Easy Loan Management</h1>
-        <p class="lead">
-          Experience a seamless and secure way to manage your loans.
-        </p>
+        <p class="lead">Experience a seamless way to manage your loans.</p>
         <% if (!user) { %>
         <a href="/auth/sign-up" class="btn btn-success btn-lg me-2"
-          >Get Started</a
+          >Create Account</a
         >
         <a href="/auth/sign-in" class="btn btn-outline-light btn-lg">Log In</a>
         <% } else { %>
@@ -77,7 +71,7 @@
       </div>
     </section>
 
-    <section class="features py-5 bg-light">
+    <!-- <section class="features py-5 bg-light">
       <div class="container">
         <div class="row text-center">
           <div class="col-lg-4 col-md-6 mb-4">
@@ -115,9 +109,9 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
-    <section class="cta py-5 bg-primary text-white text-center">
+    <!-- <section class="cta py-5 bg-primary text-white text-center">
       <div class="container">
         <h2 class="display-4 fw-bold">Start Managing Your Loans Today</h2>
         <p class="lead">
@@ -129,7 +123,7 @@
         <a href="/loans" class="btn btn-light btn-lg">Go to Dashboard</a>
         <% } %>
       </div>
-    </section>
+    </section> -->
 
     <footer class="footer bg-dark text-white py-3">
       <div class="container text-center">

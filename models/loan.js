@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 
 const loanSchema = new mongoose.Schema(
   {
-    client: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    },
     name: {
       type: String,
       required: true,
@@ -44,6 +40,15 @@ const loanSchema = new mongoose.Schema(
     },
     documentPath: {
       type: String
+    },
+    status: {
+      type: String,
+      enum: ['pending', 'approved', 'rejected'],
+      default: 'pending'
+    },
+    client: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
     }
   },
   { timestamps: true }

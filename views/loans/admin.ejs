@@ -1,0 +1,40 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loan Applications - Admin</title>
+  </head>
+  <body>
+    <h1>Loan Applications</h1>
+    
+    <p><strong>Client</strong></p>
+    <p><strong>Loan Amount</strong></p>
+    <p><strong>Status</strong></p>
+    <p><strong>Actions</strong></p>
+    
+    <div>
+      <% loans.forEach(loan => { %>
+      <div>
+        <p><%= loan.client.name %> (<%= loan.client.username %>)</p>
+        <p>BD<%= loan.amount %></p>
+        <p><%= loan.status %></p>
+        <p>
+          <% if (loan.status === 'pending') { %>
+          <form action="/loans/<%= loan._id %>/approve" method="POST">
+            <button type="submit">Approve</button>
+          </form>
+          <form action="/loans/<%= loan._id %>/reject" method="POST">
+            <button type="submit">Reject</button>
+          </form>
+          <% } else { %>
+          <span>Action completed</span>
+          <% } %>
+        </p>
+      </div>
+      <% }) %>
+    </div>
+
+    <a href="/">Go to Home Page</a>
+  </body>
+</html> -->
