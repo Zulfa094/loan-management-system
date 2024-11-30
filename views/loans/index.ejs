@@ -4,20 +4,114 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <a href="/">Home Page</a>
-    <%- include('../partials/_navbar.ejs') %>
-    <h1>Here are all your loans</h1>
-    <a href="/loans/new">Apply for a Loan</a>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">Loan System</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <% if (user) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/loans">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/sign-out">Sign Out</a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/sign-up">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/sign-in">Sign In</a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-    <ul>
-      <% loans.forEach((loan) => { %>
-      <li>
-        You have a loan <%= loan.amount %>
-        <a href="/loans/<%= loan._id %>">View more details</a>
-      </li>
-      <% }) %>
-    </ul>
+    <!-- Hero Section -->
+    <section
+      class="hero bg-primary text-white text-center d-flex align-items-center justify-content-center"
+      style="
+        background-image: url('/images/office-background.jpg');
+        background-size: cover;
+        height: 100vh;
+      "
+    >
+      <div class="container">
+        <h1 class="display-3 fw-bold">Your Loan Dashboard</h1>
+        <p class="lead">Here you can view and manage your loans with ease.</p>
+        <% if (user) { %>
+        <a href="/loans/new" class="btn btn-success btn-lg">Apply for a Loan</a>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- Loans List Section -->
+    <section class="loan-list py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Your Loans</h2>
+        <ul class="loan-list">
+          <% loans.forEach((loan) => { %>
+          <li class="loan-item mb-4 shadow-sm p-3 bg-white rounded">
+            <h5>You have a loan of BD<%= loan.amount %></h5>
+            <a href="/loans/<%= loan._id %>" class="btn btn-primary"
+              >View Details</a
+            >
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta py-5 bg-primary text-white text-center">
+      <div class="container">
+        <h2 class="display-4 fw-bold">Start Managing Your Loans Today</h2>
+        <p class="lead">Take control of your financial journey with us.</p>
+        <% if (!user) { %>
+        <a href="/auth/sign-up" class="btn btn-success btn-lg">Sign Up Now</a>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-3">
+      <div class="container text-center">
+        <small
+          >&copy; <%= new Date().getFullYear() %> Loan Management System. All
+          rights reserved.</small
+        >
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

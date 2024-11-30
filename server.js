@@ -45,7 +45,12 @@ app.use((req, res, next) => {
 
 const authController = require('./controllers/auth')
 const loanController = require('./controllers/loans')
+
 app.use('/uploads', express.static('uploads'))
+app.use(express.static('public'))
+
+app.set('view engine', 'ejs')
+app.set('views', 'views')
 
 app.use('/auth', authController)
 app.use('/loans', isSignedIn, loanController)

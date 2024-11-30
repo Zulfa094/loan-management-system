@@ -4,45 +4,130 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loan Details</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- External CSS -->
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <a href="/loans">Dashboard</a>
-    <a href="/">Home Page</a>
-    <%- include('../partials/_navbar.ejs') %>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">Loan System</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <% if (user) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/loans">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/sign-out">Sign Out</a>
+            </li>
+            <% } else { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/sign-up">Sign Up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/auth/sign-in">Sign In</a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-    <h1>Loan Details</h1>
+    <!-- Hero Section -->
+    <section
+      class="hero bg-primary text-white text-center d-flex align-items-center justify-content-center"
+      style="
+        background-image: url('/images/office-background.jpg');
+        background-size: cover;
+        height: 30vh;
+      "
+    >
+      <div class="container">
+        <h1 class="display-3 fw-bold">Loan Details</h1>
+      </div>
+    </section>
 
-    <h2>Personal Information</h2>
-    <p>Full Name: <%= loan.name %></p>
-    <p>Phone: <%= loan.phone %></p>
-    <p>Occupation: <%= loan.occupation %></p>
-    <p>Monthly Salary: $<%= loan.salary %></p>
-    <p>Company: <%= loan.company %></p>
+    <!-- Loan Details -->
+    <section class="loan-details py-5">
+      <div class="container">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">Personal Information</h2>
+            <p><strong>Full Name:</strong> <%= loan.name %></p>
+            <p><strong>Phone:</strong> <%= loan.phone %></p>
+            <p><strong>Occupation:</strong> <%= loan.occupation %></p>
+            <p><strong>Company:</strong> <%= loan.company %></p>
+            <p><strong>Monthly Salary:</strong> BD<%= loan.salary %></p>
 
-    <h2>Loan Information</h2>
-    <p>Amount: $<%= loan.amount %></p>
-    <p>Duration: <%= loan.duration %> months</p>
-    <p>Status: <%= loan.status %></p>
+            <h2 class="card-title">Loan Information</h2>
+            <p><strong>Amount:</strong> BD<%= loan.amount %></p>
+            <p><strong>Duration:</strong> <%= loan.duration %> Months</p>
 
-    <h2>Supporting Document</h2>
-    <% if (loan.document) { %>
-    <p>
-      Document:
-      <a href="<%= loan.document %>" target="_blank">View Document</a>
-    </p>
-    <% } else { %>
-    <p>No document uploaded.</p>
-    <% } %> <% if (loan.client && loan.client._id.equals(user._id)) { %>
-    <h2>Actions</h2>
-    <p>You are the owner of this loan.</p>
-    <a href="/loans/<%= loan._id %>/edit">Edit this loan</a>
-    <form action="/loans/<%= loan._id %>?_method=DELETE" method="POST">
-      <button type="submit">Delete this loan</button>
-    </form>
-    <% } else { %>
-    <p>
-      You are not the owner of this loan. <%= loan.client.username %> owns it.
-    </p>
-    <% } %>
+            <h2 class="card-title">Supporting Document</h2>
+            <% if (loan.document) { %>
+            <p>
+              <strong>Document:</strong>
+              <a href="<%= loan.document %>" target="_blank">View Document</a>
+            </p>
+            <% } else { %>
+            <p>No document uploaded.</p>
+            <% } %> <% if (loan.client && loan.client._id.equals(user._id)) { %>
+            <a href="/loans/<%= loan._id %>/edit" class="btn btn-warning"
+              >Edit Application</a
+            >
+            <form
+              action="/loans/<%= loan._id %>?_method=DELETE"
+              method="POST"
+              class="d-inline-block"
+            >
+              <button type="submit" class="btn btn-danger">
+                Delete Application
+              </button>
+            </form>
+            <% } else { %>
+            <p>
+              You are not the owner of this loan. <%= loan.client.username %>
+              owns it.
+            </p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-3">
+      <div class="container text-center">
+        <small
+          >&copy; <%= new Date().getFullYear() %> Loan Management System. All
+          rights reserved.</small
+        >
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
