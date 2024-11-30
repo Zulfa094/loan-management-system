@@ -7,6 +7,29 @@ const loanSchema = new mongoose.Schema(
       ref: 'User'
     },
 
+    name: {
+      type: String,
+      required: true,
+      minlength: 2
+    },
+    phone: {
+      type: String,
+      required: true,
+      match: /^[0-9]{8}$/
+    },
+    occupation: {
+      type: String,
+      required: true
+    },
+    salary: {
+      type: Number,
+      required: true,
+      min: 100
+    },
+    company: {
+      type: String,
+      required: true
+    },
     amount: {
       type: Number,
       required: true,
@@ -19,6 +42,10 @@ const loanSchema = new mongoose.Schema(
     },
     duration: {
       type: Number,
+      required: true
+    },
+    document: {
+      type: String,
       required: true
     }
   },

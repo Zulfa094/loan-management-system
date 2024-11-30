@@ -3,16 +3,108 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Apply for a loan</title>
+    <title>Apply for a Loan</title>
   </head>
   <body>
     <%- include('../partials/_navbar.ejs') %>
-    <h1>Apply for a loan</h1>
-    <form action="/loans" method="POST">
-      <label for="amount">Loan Amount:</label>
-      <input type="number" name="amount" required />
+    <h1>Apply for a Loan</h1>
+    <form action="/loans" method="POST" enctype="multipart/form-data">
+      <label for="name">Full Name:</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Enter your full name"
+        required
+      />
       <br />
-      <button type="submit">Submit</button>
+
+      <label for="phone">Phone :</label>
+      <input
+        type="text"
+        name="phone"
+        id="phone"
+        placeholder="Enter your phone number"
+        maxlength="8"
+        required
+      />
+      <br />
+
+      <label for="occupation">Occupation:</label>
+      <input
+        type="text"
+        name="occupation"
+        id="occupation"
+        placeholder="Enter your occupation"
+        required
+      />
+      <br />
+
+      <label for="salary">Monthly Salary :</label>
+      <input
+        type="number"
+        name="salary"
+        id="salary"
+        placeholder="Enter your salary"
+        min="100"
+        required
+      />
+      <br />
+
+      <label for="company">Company:</label>
+      <input
+        type="text"
+        name="company"
+        id="company"
+        placeholder="Enter your company name"
+        required
+      />
+      <br />
+
+      <label for="amount">Loan Amount:</label>
+      <input
+        type="number"
+        name="amount"
+        id="amount"
+        placeholder="Enter loan amount"
+        required
+      />
+      <br />
+
+      <label for="interestRate">Interest Rate :</label>
+      <input
+        type="number"
+        name="interestRate"
+        id="interestRate"
+        placeholder="Enter interest rate"
+        step="0.01"
+        required
+      />
+      <br />
+
+      <label for="duration">Duration :</label>
+      <input
+        type="number"
+        name="duration"
+        id="duration"
+        placeholder="Enter loan duration"
+        required
+      />
+      <br />
+
+      <label for="status">Loan Status:</label>
+      <select name="status" id="status">
+        <option value="pending">Pending</option>
+        <option value="approved">Approved</option>
+        <option value="rejected">Rejected</option>
+      </select>
+      <br />
+
+      <label for="document">Upload Supporting Document:</label>
+      <input type="file" name="document" id="document" />
+      <br />
+
+      <button type="submit">Submit Application</button>
     </form>
   </body>
 </html>
