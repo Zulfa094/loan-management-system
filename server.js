@@ -2,6 +2,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const express = require('express')
+const path = require('path')
 const app = express()
 
 const mongoose = require('mongoose')
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 
 const authController = require('./controllers/auth')
 const loanController = require('./controllers/loans')
+app.use('/uploads', express.static('uploads'))
 
 app.use('/auth', authController)
 app.use('/loans', isSignedIn, loanController)

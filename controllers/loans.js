@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Loan = require('../models/loan')
+const upload = require('../utils/multer')
 
 router.get('/', async (req, res) => {
   try {
@@ -18,18 +19,24 @@ router.get('/new', async (req, res) => {
   res.render('loans/new.ejs')
 })
 
-router.post('/', async (req, res) => {
-  req.body.client = req.session.user._id
-  await Loan.create(req.body)
-  res.redirect('/loans')
+router.post('/', upload.single('document'), async (req, res) => {
+  try {
+    req.body.client = req.session.user._id
+    if (req.file) {
+      req.body.document = req.file.path
+    }
+    await Loan.create(req.body)
+    res.redirect('/loans')
+  } catch (err) {
+    console.log(err)
+    res.redirect('/loans')
+  }
 })
 
-router.get('/:loansId', async (req, res) => {
+router.get('/:loanId', async (req, res) => {
   try {
-    const populatedLoans = await Loan.findById(
-      req.params.loansId.loanId
-    ).populate('client')
-    res.render('loans/show.ejs')
+    const loan = await Loan.findById(req.params.loanId).populate('client')
+    res.render('loans/show.ejs', { loan })
   } catch (err) {
     console.log(err)
     res.redirect('/')
@@ -46,10 +53,13 @@ router.get('/:loanId/edit', async (req, res) => {
   }
 })
 
-router.put('/:loanId', async (req, res) => {
+router.put('/:loanId', upload.single('document'), async (req, res) => {
   try {
     const loan = await Loan.findById(req.params.loanId)
     if (loan.client.equals(req.session.user._id)) {
+      if (req.file) {
+        req.body.documentPath = req.file.path
+      }
       await loan.updateOne(req.body)
       res.redirect('/loans')
     } else {

@@ -1,27 +1,16 @@
 const multer = require('multer')
 const path = require('path')
 
+// Define storage options
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/')
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/') // specify the directory where the file will be saved
   },
-  filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${file.originalname}`
-    cb(null, uniqueName)
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)) // generate a unique filename
   }
 })
 
-const fileFilter = (req, file, cb) => {
-  if (
-    file.mimetype === 'application/pdf' ||
-    file.mimetype.startsWith('image/')
-  ) {
-    cb(null, true)
-  } else {
-    cb(new Error('Only PDF and image files are allowed'), false)
-  }
-}
-
-const upload = multer({ storage, fileFilter })
+const upload = multer({ storage: storage })
 
 module.exports = upload

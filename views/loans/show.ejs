@@ -6,13 +6,43 @@
     <title>Loan Details</title>
   </head>
   <body>
+    <a href="/loans">Dashboard</a>
+    <a href="/">Home Page</a>
     <%- include('../partials/_navbar.ejs') %>
+
     <h1>Loan Details</h1>
-    <p><strong>Loan ID:</strong> <%= loan._id %></p>
-    <p><strong>Amount:</strong> $<%= loan.amount %></p>
-    <p><strong>Status:</strong> <%= loan.status %></p>
-    <p><strong>Client:</strong> <%= loan.client.username %></p>
-    <a href="/loans/<%= loan._id %>/edit">Edit</a>
-    <a href="/loans">Back to Loans</a>
+
+    <h2>Personal Information</h2>
+    <p>Full Name: <%= loan.name %></p>
+    <p>Phone: <%= loan.phone %></p>
+    <p>Occupation: <%= loan.occupation %></p>
+    <p>Monthly Salary: $<%= loan.salary %></p>
+    <p>Company: <%= loan.company %></p>
+
+    <h2>Loan Information</h2>
+    <p>Amount: $<%= loan.amount %></p>
+    <p>Duration: <%= loan.duration %> months</p>
+    <p>Status: <%= loan.status %></p>
+
+    <h2>Supporting Document</h2>
+    <% if (loan.documentPath) { %>
+    <p>
+      Document:
+      <a href="<%= loan.documentPath %>" target="_blank">View Document</a>
+    </p>
+    <% } else { %>
+    <p>No document uploaded.</p>
+    <% } %> <% if (loan.client && loan.client._id.equals(user._id)) { %>
+    <h2>Actions</h2>
+    <p>You are the owner of this loan.</p>
+    <a href="/loans/<%= loan._id %>/edit">Edit this loan</a>
+    <form action="/loans/<%= loan._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete this loan</button>
+    </form>
+    <% } else { %>
+    <p>
+      You are not the owner of this loan. <%= loan.client.username %> owns it.
+    </p>
+    <% } %>
   </body>
 </html>

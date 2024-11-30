@@ -6,7 +6,6 @@ const loanSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
     },
-
     name: {
       type: String,
       required: true,
@@ -35,11 +34,6 @@ const loanSchema = new mongoose.Schema(
       required: true,
       min: 0
     },
-    interestRate: {
-      type: Number,
-      required: true,
-      min: 0
-    },
     duration: {
       type: Number,
       required: true
@@ -47,6 +41,9 @@ const loanSchema = new mongoose.Schema(
     document: {
       type: String,
       required: true
+    },
+    documentPath: {
+      type: String
     }
   },
   { timestamps: true }

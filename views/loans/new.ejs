@@ -6,9 +6,11 @@
     <title>Apply for a Loan</title>
   </head>
   <body>
+    <a href="/loans">Dashboard</a>
+    <a href="/">Home Page</a>
     <%- include('../partials/_navbar.ejs') %>
     <h1>Apply for a Loan</h1>
-    <form action="/loans" method="POST" enctype="multipart/form-data">
+    <form method="POST" action="/loans" enctype="multipart/form-data">
       <label for="name">Full Name:</label>
       <input
         type="text"
@@ -71,17 +73,6 @@
       />
       <br />
 
-      <label for="interestRate">Interest Rate :</label>
-      <input
-        type="number"
-        name="interestRate"
-        id="interestRate"
-        placeholder="Enter interest rate"
-        step="0.01"
-        required
-      />
-      <br />
-
       <label for="duration">Duration :</label>
       <input
         type="number"
@@ -90,14 +81,6 @@
         placeholder="Enter loan duration"
         required
       />
-      <br />
-
-      <label for="status">Loan Status:</label>
-      <select name="status" id="status">
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-      </select>
       <br />
 
       <label for="document">Upload Supporting Document:</label>

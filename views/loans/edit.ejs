@@ -6,9 +6,61 @@
     <title>Edit Loan</title>
   </head>
   <body>
+    <a href="/loans">Dashboard</a>
     <%- include('../partials/_navbar.ejs') %>
     <h1>Edit Loan</h1>
     <form action="/loans/<%= loan._id %>?_method=PUT" method="POST">
+      <label for="name">Full Name:</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value="<%= loan.name %>"
+        required
+      />
+      <br />
+
+      <label for="phone">Phone:</label>
+      <input
+        type="text"
+        name="phone"
+        id="phone"
+        value="<%= loan.phone %>"
+        maxlength="8"
+        required
+      />
+      <br />
+
+      <label for="occupation">Occupation:</label>
+      <input
+        type="text"
+        name="occupation"
+        id="occupation"
+        value="<%= loan.occupation %>"
+        required
+      />
+      <br />
+
+      <label for="salary">Monthly Salary:</label>
+      <input
+        type="number"
+        name="salary"
+        id="salary"
+        value="<%= loan.salary %>"
+        required
+      />
+      <br />
+
+      <label for="company">Company:</label>
+      <input
+        type="text"
+        name="company"
+        id="company"
+        value="<%= loan.company %>"
+        required
+      />
+      <br />
+
       <label for="amount">Loan Amount:</label>
       <input
         type="number"
@@ -18,16 +70,8 @@
         required
       />
       <br />
-      <label for="interestRate">Interest Rate (%):</label>
-      <input
-        type="number"
-        name="interestRate"
-        id="interestRate"
-        value="<%= loan.interestRate %>"
-        required
-      />
-      <br />
-      <label for="duration">Duration (months):</label>
+
+      <label for="duration">Duration :</label>
       <input
         type="number"
         name="duration"
@@ -35,6 +79,10 @@
         value="<%= loan.duration %>"
         required
       />
+      <br />
+
+      <label for="document">Upload Supporting Document:</label>
+      <input type="file" name="document" id="document" />
       <br />
       <button type="submit">Update Loan</button>
     </form>
