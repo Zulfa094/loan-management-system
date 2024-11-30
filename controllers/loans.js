@@ -58,7 +58,7 @@ router.put('/:loanId', upload.single('document'), async (req, res) => {
     const loan = await Loan.findById(req.params.loanId)
     if (loan.client.equals(req.session.user._id)) {
       if (req.file) {
-        req.body.documentPath = req.file.path
+        req.body.document = req.file.path
       }
       await loan.updateOne(req.body)
       res.redirect('/loans')

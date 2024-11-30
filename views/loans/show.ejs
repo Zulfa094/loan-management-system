@@ -25,10 +25,10 @@
     <p>Status: <%= loan.status %></p>
 
     <h2>Supporting Document</h2>
-    <% if (loan.documentPath) { %>
+    <% if (loan.document) { %>
     <p>
       Document:
-      <a href="<%= loan.documentPath %>" target="_blank">View Document</a>
+      <a href="<%= loan.document %>" target="_blank">View Document</a>
     </p>
     <% } else { %>
     <p>No document uploaded.</p>
