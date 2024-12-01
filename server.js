@@ -46,7 +46,7 @@ app.use((req, res, next) => {
 const authController = require('./controllers/auth')
 const loanController = require('./controllers/loans')
 
-app.use('/uploads', express.static('uploads'))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use(express.static('public'))
 
 app.set('view engine', 'ejs')

@@ -29,7 +29,7 @@ router.post('/', upload.single('document'), async (req, res) => {
   try {
     req.body.client = req.session.user._id
     if (req.file) {
-      req.body.document = req.file.path
+      req.body.document = '/uploads/' + req.file.filename
     }
     await Loan.create(req.body)
     populate('client')
