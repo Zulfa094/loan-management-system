@@ -13,8 +13,6 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
     />
-
-    <!-- <link rel="stylesheet" href="public/css/styles.css" /> -->
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -34,9 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <% if (user) { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/loans">Dashboard</a>
-            </li>
+
             <li class="nav-item">
               <a class="nav-link" href="/auth/sign-out">Sign Out</a>
             </li>
@@ -60,34 +56,37 @@
       <div class="container">
         <h1 class="display-3 fw-bold">Your Loan Dashboard</h1>
         <p class="lead">Here you can view and manage your loans with ease.</p>
-        <% if (user) { %>
-        <a href="/loans/new" class="btn btn-success btn-lg">Apply for a Loan</a>
-        <% } %>
       </div>
     </section>
 
     <section class="loan-list py-5">
       <div class="container">
-        <% if (user && loans.length > 0) { %>
+        <% if (loans.length > 0) { %>
         <h2 class="text-center mb-4">Your Loans</h2>
-        <ul class="loan-list">
+        <ul class="list-group">
           <% loans.forEach((loan) => { %>
-          <li class="loan-item mb-4 shadow-sm p-3 bg-white rounded">
-            <h5>You have a loan of BD<%= loan.amount %></h5>
-            <a href="/loans/<%= loan._id %>" class="btn btn-primary"
-              >View Details</a
+          <li
+            class="list-group-item d-flex justify-content-between align-items-center"
+          >
+            <span
+              >Loan Amount: BD<%= loan.amount %> | Duration: <%= loan.duration
+              %> months</span
+            >
+            <a href="/loans/<%= loan._id %>" class="btn btn-primary btn-sm"
+              >View More Details</a
             >
           </li>
           <% }) %>
         </ul>
-        <% } else if (user._id) { %>
-        <h2 class="text-center mb-4">No Loans Found</h2>
-        <p class="text-center">You haven't applied for any loans yet.</p>
         <% } else { %>
+        <h2 class="text-center mb-4">No Loans Found</h2>
         <p class="text-center">
-          Please <a href="/auth/sign-in" class="text-primary">sign in</a> to
-          view your loans.
+          You haven't applied for any loans yet. Start your application below.
         </p>
+        <% } %> <% if (user && loans.length === 0) { %>
+        <div class="text-center mt-4">
+          <a href="/loans/new" class="btn btn-success btn-lg">Apply Now</a>
+        </div>
         <% } %>
       </div>
     </section>
@@ -96,9 +95,6 @@
       <div class="container">
         <h2 class="display-4 fw-bold">Start Managing Your Loans Today</h2>
         <p class="lead">Take control of your financial journey with us.</p>
-        <% if (!user) { %>
-        <a href="/auth/sign-up" class="btn btn-success btn-lg">Sign Up Now</a>
-        <% } %>
       </div>
     </section>
 

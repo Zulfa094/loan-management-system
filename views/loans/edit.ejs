@@ -33,21 +33,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
-            <% if (user) { %>
             <li class="nav-item">
               <a class="nav-link" href="/loans">Dashboard</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/auth/sign-out">Sign Out</a>
             </li>
-            <% } else { %>
-            <li class="nav-item">
-              <a class="nav-link" href="/auth/sign-up">Sign Up</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/auth/sign-in">Sign In</a>
-            </li>
-            <% } %>
           </ul>
         </div>
       </div>

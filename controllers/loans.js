@@ -6,7 +6,9 @@ const upload = require('../utils/multer')
 
 router.get('/', async (req, res) => {
   try {
-    const populatedLoans = await Loan.find({}).populate('client')
+    const populatedLoans = await Loan.find({
+      client: req.session.user._id
+    }).populate('client')
     console.log('Populated Loans: ', populatedLoans)
     res.render('Loans/index.ejs', { loans: populatedLoans })
   } catch (err) {
@@ -16,7 +18,11 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/new', async (req, res) => {
-  res.render('loans/new.ejs')
+  try {
+    res.render('loans/new.ejs', { user: req.user })
+  } catch (err) {
+    console.log(err)
+  }
 })
 
 router.post('/', upload.single('document'), async (req, res) => {
@@ -26,6 +32,8 @@ router.post('/', upload.single('document'), async (req, res) => {
       req.body.document = req.file.path
     }
     await Loan.create(req.body)
+    populate('client')
+
     res.redirect('/loans')
   } catch (err) {
     console.log(err)
@@ -90,33 +98,38 @@ router.delete('/:loanId', async (req, res) => {
 
 // router.get('/admin', async (req, res) => {
 //   try {
-//     await Loan.find().populate('client', 'username name')
-//     res.render('admin', { loan })
+//     const loans = await Loan.find().populate('client', 'username name');
+//     res.render('admin', { loans });
 //   } catch (err) {
-//     console.log(err)
+//     console.log(err);
+//     res.status(500).send('Internal Server Error');
 //   }
-// })
+// });
 
 // router.post('/loans/:id/approve', async (req, res) => {
 //   try {
-//     await Loan.findById(req.params.loanId, {
-//       status: 'approved'
-//     })
-//     res.redirect('/loans/admin')
+
+//     await Loan.findByIdAndUpdate(req.params.id, {
+//       status: 'approved',
+//     });
+//     res.redirect('/loans/admin');
 //   } catch (err) {
-//     console.log(err)
+//     console.log(err);
+//     res.status(500).send('Internal Server Error');
 //   }
-// })
+// });
 
 // router.post('/loans/:id/reject', async (req, res) => {
 //   try {
-//     await Loan.findById(req.params.loanId, {
-//       status: 'rejected'
-//     })
-//     res.redirect('/loans/admin')
+
+//     await Loan.findByIdAndUpdate(req.params.id, {
+//       status: 'rejected',
+//     });
+//     res.redirect('/loans/admin');
 //   } catch (err) {
-//     console.log(err)
+//     console.log(err);
+//     res.status(500).send('Internal Server Error');
 //   }
-// })
+// });
 
 module.exports = router
