@@ -83,11 +83,12 @@
         <p class="text-center">
           You haven't applied for any loans yet. Start your application below.
         </p>
-        <% } %> <% if (user && loans.length === 0) { %>
-        <div class="text-center mt-4">
-          <a href="/loans/new" class="btn btn-success btn-lg">Apply Now</a>
-        </div>
         <% } %>
+        <div class="text-center mt-4">
+          <a href="/loans/new" class="btn btn-success btn-lg"
+            >Apply for a new Loan</a
+          >
+        </div>
       </div>
     </section>
 

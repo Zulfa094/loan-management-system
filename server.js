@@ -12,6 +12,7 @@ const session = require('express-session')
 
 const isSignedIn = require('./middleware/is-signed-in')
 const passUserToView = require('./middleware/pass-user-to-view')
+const isAdmin = require('./middleware/is-admin')
 
 const port = process.env.PORT ? process.env.PORT : '3000'
 

@@ -96,40 +96,40 @@ router.delete('/:loanId', async (req, res) => {
   }
 })
 
-// router.get('/admin', async (req, res) => {
+//Admin
+
+// router.post('/loans/:loanId/approve', async (req, res) => {
 //   try {
-//     const loans = await Loan.find().populate('client', 'username name');
-//     res.render('admin', { loans });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send('Internal Server Error');
-//   }
-// });
+//     const loan = await Loan.findByIdAndUpdate(
+//       req.params.loanId,
+//       {
+//         status: 'approved'
+//       },
+//       { new: true }
+//     )
 
-// router.post('/loans/:id/approve', async (req, res) => {
+//     res.redirect('/loans')
+//   } catch (err) {
+//     console.log(err)
+//     res.redirect('/loans')
+//   }
+// })
+
+// router.post('/loans/:loanId/reject', async (req, res) => {
 //   try {
+//     const loan = await Loan.findByIdAndUpdate(
+//       req.params.loanId,
+//       {
+//         status: 'rejected'
+//       },
+//       { new: true }
+//     )
 
-//     await Loan.findByIdAndUpdate(req.params.id, {
-//       status: 'approved',
-//     });
-//     res.redirect('/loans/admin');
+//     res.redirect('/loans')
 //   } catch (err) {
-//     console.log(err);
-//     res.status(500).send('Internal Server Error');
+//     console.log(err)
+//     res.redirect('/loans')
 //   }
-// });
-
-// router.post('/loans/:id/reject', async (req, res) => {
-//   try {
-
-//     await Loan.findByIdAndUpdate(req.params.id, {
-//       status: 'rejected',
-//     });
-//     res.redirect('/loans/admin');
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).send('Internal Server Error');
-//   }
-// });
+// })
 
 module.exports = router
